@@ -24,19 +24,16 @@ const HERO_TEAM_PHOTOS = [
 
   const slides = [...host.querySelectorAll('.hero-slide-portal')];
   let current = 0;
-  let timer = null;
-
   const show = (next) => {
     current = (next + slides.length) % slides.length;
     slides.forEach((slide, i) => slide.classList.toggle('active', i === current));
     if (indexEl) indexEl.textContent = `${String(current + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
   };
 
-  const start = () => {
-    clearInterval(timer);
-    timer = setInterval(() => show(current + 1), 4200);
-  };
-  start();
+  if (frame) {
+    frame.style.cursor = 'pointer';
+    frame.addEventListener('click', () => show(current + 1));
+  }
 
   if (frame && window.matchMedia('(hover:hover)').matches) {
     frame.addEventListener('pointermove', (e) => {
