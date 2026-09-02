@@ -160,7 +160,7 @@ const PORTAL_TEAM = [
   { name: "Rajani Desai", photo: "assets/members/rajani-desai.jpg", role: "Event Head", department: "Events", icon: "calendar" },
   { name: "Pravin Aswale", photo: "assets/members/pravin-aswale.jpg", role: "Event Head", department: "Events", icon: "calendar" },
   { name: "Anshika Sharma", photo: "assets/members/anshika-sharma.jpg", role: "Social Media & Marketing", department: "Marketing", icon: "bullhorn" },
-  { name: "Teerthraj Patil", photo: "assets/members/teerthraj-patil.jpg", role: "Social Media & Marketing", department: "Marketing", icon: "bullhorn" },
+  { name: "Teerthraj Patil", photo: "assets/members/teerthraj-patil.PNG", role: "Social Media & Marketing", department: "Marketing", icon: "bullhorn" },
   { name: "Aryan Patil", photo: "assets/members/aryan-patil.jpg", role: "Social Media & Marketing", department: "Marketing", icon: "bullhorn" },
   { name: "Snehal Visapure", photo: "assets/members/snehal-visapure.jpg", role: "Data Manager", department: "Data Management", icon: "database" },
   { name: "Bhargavi Pujari", photo: "assets/members/bhargavi-rukkepujari.jpg", role: "Data Manager", department: "Data Management", icon: "database" },
