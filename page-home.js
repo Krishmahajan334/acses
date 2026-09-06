@@ -6,12 +6,12 @@
 /* Portal-inspired hero photo rotation — home hero only. */
 const HERO_TEAM_PHOTOS = [
   { src: "assets/portal/images/team_img.png", alt: "ACSES team group photo" },
-  { src: "https://i.postimg.cc/MpPmG4tr/Inoguration.jpg", alt: "ACSES community at inauguration" },
+  { src: "assets/portal/images/inaugration.jpeg", alt: "ACSES community at inauguration" },
   { src: "https://i.postimg.cc/hGy6cXWN/Freshers.jpg", alt: "ACSES students at freshers event" },
   { src: "https://i.postimg.cc/ZYxxtQGG/Whats-App-Image-2025-09-18-at-11-52-30-AM.jpg", alt: "ACSES student community" }
 ];
 
-(function initPortalHeroSlideshow(){
+(function initPortalHeroSlideshow() {
   const host = document.getElementById('heroSlideshowPortal');
   const indexEl = document.getElementById('heroPhotoIndex');
   const frame = document.getElementById('heroPhotoFrame');
@@ -137,85 +137,85 @@ if (window.bindHoverTargets) window.bindHoverTargets();
 
 
 function initPopOutAnimations() {
-    const holoCards = document.querySelectorAll('.holo-card');
-    if (!holoCards.length) return;
-    
-    const checkCenterCard = () => {
-        if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
-            holoCards.forEach(card => card.classList.remove('pop-active'));
-            return;
+  const holoCards = document.querySelectorAll('.holo-card');
+  if (!holoCards.length) return;
+
+  const checkCenterCard = () => {
+    if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+      holoCards.forEach(card => card.classList.remove('pop-active'));
+      return;
+    }
+
+    const viewportCenter = window.innerHeight / 2;
+    let minDistance = Infinity;
+
+    holoCards.forEach(card => {
+      const rect = card.getBoundingClientRect();
+      if (rect.bottom > 0 && rect.top < window.innerHeight) {
+        const cardCenter = rect.top + (rect.height / 2);
+        const distance = Math.abs(viewportCenter - cardCenter);
+        if (distance < minDistance) {
+          minDistance = distance;
         }
+      }
+    });
 
-        const viewportCenter = window.innerHeight / 2;
-        let minDistance = Infinity;
+    holoCards.forEach(card => {
+      const rect = card.getBoundingClientRect();
+      if (rect.bottom > 0 && rect.top < window.innerHeight) {
+        const cardCenter = rect.top + (rect.height / 2);
+        const distance = Math.abs(viewportCenter - cardCenter);
+        if (Math.abs(distance - minDistance) < 10) {
+          card.classList.add('pop-active');
+        } else {
+          card.classList.remove('pop-active');
+        }
+      } else {
+        card.classList.remove('pop-active');
+      }
+    });
+  };
 
-        holoCards.forEach(card => {
-            const rect = card.getBoundingClientRect();
-            if (rect.bottom > 0 && rect.top < window.innerHeight) {
-                const cardCenter = rect.top + (rect.height / 2);
-                const distance = Math.abs(viewportCenter - cardCenter);
-                if (distance < minDistance) {
-                    minDistance = distance;
-                }
-            }
-        });
-
-        holoCards.forEach(card => {
-            const rect = card.getBoundingClientRect();
-            if (rect.bottom > 0 && rect.top < window.innerHeight) {
-                const cardCenter = rect.top + (rect.height / 2);
-                const distance = Math.abs(viewportCenter - cardCenter);
-                if (Math.abs(distance - minDistance) < 10) {
-                    card.classList.add('pop-active');
-                } else {
-                    card.classList.remove('pop-active');
-                }
-            } else {
-                card.classList.remove('pop-active');
-            }
-        });
-    };
-
-    window.addEventListener('scroll', checkCenterCard, { passive: true });
-    window.addEventListener('touchmove', checkCenterCard, { passive: true });
-    window.addEventListener('resize', checkCenterCard, { passive: true });
-    setTimeout(checkCenterCard, 100); 
+  window.addEventListener('scroll', checkCenterCard, { passive: true });
+  window.addEventListener('touchmove', checkCenterCard, { passive: true });
+  window.addEventListener('resize', checkCenterCard, { passive: true });
+  setTimeout(checkCenterCard, 100);
 }
 initPopOutAnimations();
 
 
 async function loadTeamPreview() {
-    const container = document.getElementById('dynamicTeamPreview');
-    if (!container) return;
+  const container = document.getElementById('dynamicTeamPreview');
+  if (!container) return;
 
-    let html = '';
-    let success = false;
+  let html = '';
+  let success = false;
 
-    try {
-        const response = await fetch('members.html');
-        if (response.ok) {
-            const text = await response.text();
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(text, 'text/html');
-            const cards = doc.querySelectorAll('.holo-card');
-            
-            if (cards.length >= 2) {
-                for (let i = 0; i < 2; i++) {
-                    const clone = cards[i].cloneNode(true);
-                    clone.classList.add('reveal3d');
-                    clone.style.setProperty('--rd', `${i * 100}ms`);
-                    html += clone.outerHTML;
-                }
-                success = true;
-            }
+  try {
+    const response = await fetch('members.html');
+    if (response.ok) {
+      const text = await response.text();
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(text, 'text/html');
+      const cards = doc.querySelectorAll('.holo-card');
+
+      if (cards.length >= 2) {
+        for (let i = 0; i < 2; i++) {
+          const clone = cards[i].cloneNode(true);
+          clone.classList.add('reveal3d');
+          clone.style.setProperty('--rd', `${i * 100}ms`);
+          html += clone.outerHTML;
         }
-    } catch (e) {
-        console.warn("CORS fetch failed (likely running via file://). Using fallback cards.");
+        success = true;
+      }
     }
+  } catch (e) {
+    console.warn("CORS fetch failed (likely running via file://). Using fallback cards.");
+  }
 
-    // Fallback if fetch fails (e.g., opened via file:// protocol without a server)
-    if (!success) {
-        html = `
+  // Fallback if fetch fails (e.g., opened via file:// protocol without a server)
+  if (!success) {
+    html = `
         <div class="holo-card card-amber-president reveal3d" style="--rd:0ms;">
             <div class="holo-avatar-box ring-amber">
                 <img loading="lazy" src="assets/members/krish-mahajan.png" alt="Krish Mahajan" style="object-position: top;">
@@ -243,10 +243,10 @@ async function loadTeamPreview() {
             </div>
         </div>
         `;
-    }
+  }
 
-    // Add explore card
-    html += `
+  // Add explore card
+  html += `
     <a href="members.html" class="holo-card reveal3d" style="--rd:200ms; display: flex; flex-direction: column; justify-content: center; align-items: center; text-decoration: none; min-height: 320px; border-style: dashed; border-color: var(--line);">
         <div class="holo-avatar-box" style="margin-bottom: 24px; background: transparent;">
             <div class="radar-ring" style="border-color: var(--ink-dim); inset: 0;"></div>
@@ -257,10 +257,10 @@ async function loadTeamPreview() {
     </a>
     `;
 
-    container.innerHTML = html;
-    
-    // Re-bind animations for newly injected DOM elements
-    if (window.observeReveals) window.observeReveals();
-    if (window.initPopOutAnimations) window.initPopOutAnimations();
+  container.innerHTML = html;
+
+  // Re-bind animations for newly injected DOM elements
+  if (window.observeReveals) window.observeReveals();
+  if (window.initPopOutAnimations) window.initPopOutAnimations();
 }
 loadTeamPreview();
