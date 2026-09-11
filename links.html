@@ -2,196 +2,236 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Crucial for mobile optimization -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>ACSES — Links</title>
 <meta name="description" content="ACSES DKTE Official Links">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<!-- Load the main project styles -->
 <link rel="stylesheet" href="style.css">
 <link rel="icon" type="image/png" href="assets/portal/images/favicon.png">
+
 <style>
+  /* Mobile-first specific overrides for the links page */
   body {
     background-color: var(--bg);
     color: var(--ink);
-    font-family: 'Inter', sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 100vh;
+    min-height: 100svh; /* svh for better mobile rendering */
     margin: 0;
-    padding: 40px 20px;
-    position: relative;
+    padding: 0;
     overflow-x: hidden;
   }
   
-  .links-container {
-    max-width: 600px;
-    width: 100%;
+  .links-wrapper {
+    position: relative;
     z-index: 10;
+    width: 100%;
+    max-width: 580px;
+    padding: 60px 24px 80px;
     display: flex;
     flex-direction: column;
     gap: 16px;
+    margin: 0 auto;
   }
 
+  /* Profile Header */
   .profile-section {
     text-align: center;
-    margin-bottom: 32px;
+    margin-bottom: 24px;
+    animation: fadeUp .8s cubic-bezier(.16,.8,.28,1) forwards;
   }
 
   .profile-logo {
-    width: 120px;
-    height: auto;
-    border-radius: 12px;
-    margin-bottom: 16px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-    border: 1px solid rgba(255,255,255,0.1);
+    width: 100px;
+    height: 100px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.1);
+    object-fit: cover;
+    background: var(--panel);
   }
 
   .profile-title {
-    font-family: 'Sora', sans-serif;
+    font-family: var(--display);
     font-size: 24px;
     font-weight: 700;
     margin: 0 0 8px 0;
-    background: linear-gradient(to right, #fff, rgba(255,255,255,0.6));
-    -webkit-background-clip: text;
-    color: transparent;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  
+  .profile-title span {
+    color: var(--circuit);
   }
 
   .profile-bio {
     color: var(--ink-dim);
-    font-size: 15px;
+    font-size: 14.5px;
     margin: 0;
+    line-height: 1.5;
   }
 
+  /* Re-using the glass card (gcard) concept for links */
   .link-card {
     display: flex;
     align-items: center;
-    padding: 18px 24px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 12px;
+    padding: 18px 22px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 14px;
     color: var(--ink);
     text-decoration: none;
     font-weight: 500;
-    transition: all 0.3s ease;
+    transition: transform .25s ease-out, border-color .3s ease, box-shadow .3s ease, background .3s ease;
     backdrop-filter: blur(10px);
     position: relative;
     overflow: hidden;
+    opacity: 0;
+    animation: fadeUp .8s cubic-bezier(.16,.8,.28,1) forwards;
   }
+
+  .link-card:nth-child(1) { animation-delay: 0.1s; }
+  .link-card:nth-child(2) { animation-delay: 0.15s; }
+  .link-card:nth-child(3) { animation-delay: 0.2s; }
+  .link-card:nth-child(4) { animation-delay: 0.25s; }
+  .link-card:nth-child(5) { animation-delay: 0.3s; }
+  .link-card:nth-child(6) { animation-delay: 0.35s; }
+  .link-card:nth-child(7) { animation-delay: 0.4s; }
 
   .link-card:hover {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 255, 255, 0.2);
+    border-color: rgba(76,141,255,.5); 
+    box-shadow: 0 12px 30px -10px rgba(0,0,0,.6);
     transform: translateY(-2px);
+    background: rgba(255,255,255,0.06);
   }
 
+  /* The primary / highlight link */
   .link-card.primary {
-    background: linear-gradient(135deg, rgba(56, 189, 248, 0.1), rgba(59, 130, 246, 0.1));
-    border-color: rgba(56, 189, 248, 0.3);
+    background: linear-gradient(135deg, rgba(76,141,255,0.15), rgba(76,255,178,0.1));
+    border-color: rgba(76,141,255,.4);
   }
   
   .link-card.primary:hover {
-    background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(59, 130, 246, 0.2));
-    border-color: rgba(56, 189, 248, 0.6);
+    background: linear-gradient(135deg, rgba(76,141,255,0.25), rgba(76,255,178,0.15));
+    border-color: var(--circuit);
+    box-shadow: 0 12px 30px -10px rgba(76,141,255,.3);
   }
 
   .link-icon {
-    width: 32px;
-    height: 32px;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.05);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 16px;
-    font-size: 20px;
-    color: var(--circuit);
+    margin-right: 18px;
+    font-size: 16px;
+    color: var(--ink);
+    flex-shrink: 0;
+  }
+  
+  .link-card.primary .link-icon {
+    background: linear-gradient(135deg, var(--blue), var(--circuit));
+    color: #07090A;
+    border: none;
   }
 
   .link-text {
     flex-grow: 1;
-    font-size: 16px;
+    font-size: 15.5px;
   }
 
   .link-arrow {
-    opacity: 0.5;
+    opacity: 0.4;
     transition: opacity 0.3s ease, transform 0.3s ease;
+    font-size: 14px;
   }
 
   .link-card:hover .link-arrow {
     opacity: 1;
     transform: translateX(4px);
+    color: var(--circuit);
   }
 
   .section-divider {
-    margin: 32px 0 16px;
+    margin: 32px 0 8px;
     display: flex;
     align-items: center;
     text-align: center;
-    color: var(--ink-dim);
-    font-size: 13px;
+    font-family: var(--mono);
+    color: var(--circuit);
+    font-size: 11px;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 0.14em;
     font-weight: 600;
+    opacity: 0;
+    animation: fadeUp .8s cubic-bezier(.16,.8,.28,1) forwards;
+    animation-delay: 0.2s;
   }
 
   .section-divider::before,
   .section-divider::after {
     content: '';
     flex: 1;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+    border-bottom: 1px solid var(--line);
   }
 
   .section-divider::before { margin-right: 16px; }
   .section-divider::after { margin-left: 16px; }
-
-  /* Background elements matching index.html */
-  #circuitPattern {
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    opacity: 0.2;
-    z-index: 0;
-    pointer-events: none;
-    background-image: radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px);
-    background-size: 30px 30px;
-  }
-
-  .orb {
-    position: fixed;
-    border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.4;
-    z-index: 0;
-    pointer-events: none;
-  }
   
-  .orb-1 { width: 300px; height: 300px; background: rgba(56, 189, 248, 0.3); top: -100px; left: -100px; }
-  .orb-2 { width: 400px; height: 400px; background: rgba(139, 92, 246, 0.2); bottom: -200px; right: -100px; }
+  /* Footer text */
+  .links-footer {
+    text-align: center;
+    margin-top: 40px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-dim);
+    opacity: 0;
+    animation: fadeUp .8s cubic-bezier(.16,.8,.28,1) forwards;
+    animation-delay: 0.5s;
+  }
+
+  @keyframes fadeUp { 
+    from { opacity: 0; transform: translateY(16px); } 
+    to { opacity: 1; transform: translateY(0); } 
+  }
+
 </style>
 </head>
 <body>
 
+<!-- Native ACSES Background Elements -->
 <div id="circuitPattern"></div>
+<div class="hero-scanlines" aria-hidden="true" style="opacity: 0.5;"></div>
 <div class="orb orb-1"></div>
 <div class="orb orb-2"></div>
+<div class="orb orb-3" style="bottom: auto; top: 50%; opacity: 0.1;"></div>
 
-<div class="links-container">
+<div class="links-wrapper">
   
   <div class="profile-section">
     <img src="assets/portal/images/logo.png" alt="ACSES Logo" class="profile-logo">
-    <h1 class="profile-title">ACSES DKTE</h1>
-    <p class="profile-bio">Association of Computer Science & Engineering Students</p>
+    <h1 class="profile-title">ACSES <span>DKTE</span></h1>
+    <p class="profile-bio">Association of Computer Science<br>& Engineering Students</p>
   </div>
 
   <a href="https://tinyurl.com/acsesmembership" class="link-card primary" target="_blank" rel="noopener">
     <div class="link-icon"><i class="fa-solid fa-user-plus"></i></div>
     <div class="link-text">Register as a Member</div>
-    <div class="link-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+    <div class="link-arrow"><i class="fa-solid fa-arrow-right"></i></div>
   </a>
 
   <a href="index.html" class="link-card">
     <div class="link-icon"><i class="fa-solid fa-globe"></i></div>
     <div class="link-text">Official Website</div>
-    <div class="link-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+    <div class="link-arrow"><i class="fa-solid fa-arrow-right"></i></div>
   </a>
 
   <div class="section-divider">Socials</div>
@@ -199,19 +239,19 @@
   <a href="https://www.instagram.com/acses_dkte/" class="link-card" target="_blank" rel="noopener">
     <div class="link-icon" style="color: #E1306C;"><i class="fa-brands fa-instagram"></i></div>
     <div class="link-text">Instagram</div>
-    <div class="link-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+    <div class="link-arrow"><i class="fa-solid fa-arrow-right"></i></div>
   </a>
 
   <a href="https://www.linkedin.com/company/acses-association-of-computer-science-and-engineering-students/" class="link-card" target="_blank" rel="noopener">
-    <div class="link-icon" style="color: #0077B5;"><i class="fa-brands fa-linkedin"></i></div>
+    <div class="link-icon" style="color: #4C8DFF;"><i class="fa-brands fa-linkedin"></i></div>
     <div class="link-text">LinkedIn</div>
-    <div class="link-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+    <div class="link-arrow"><i class="fa-solid fa-arrow-right"></i></div>
   </a>
 
   <a href="https://github.com/acses-dkte" class="link-card" target="_blank" rel="noopener">
     <div class="link-icon" style="color: #ffffff;"><i class="fa-brands fa-github"></i></div>
     <div class="link-text">GitHub</div>
-    <div class="link-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+    <div class="link-arrow"><i class="fa-solid fa-arrow-right"></i></div>
   </a>
 
   <div class="section-divider">Contact Us</div>
@@ -219,16 +259,22 @@
   <a href="tel:+919055721797" class="link-card">
     <div class="link-icon"><i class="fa-solid fa-phone"></i></div>
     <div class="link-text">Krish Mahajan (President)</div>
-    <div class="link-arrow"><i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 12px;"></i></div>
+    <div class="link-arrow"><i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 11px;"></i></div>
   </a>
 
   <a href="tel:+919325324272" class="link-card">
     <div class="link-icon"><i class="fa-solid fa-phone"></i></div>
     <div class="link-text">Gomtesh Patil (Vice President)</div>
-    <div class="link-arrow"><i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 12px;"></i></div>
+    <div class="link-arrow"><i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 11px;"></i></div>
   </a>
+  
+  <div class="links-footer">
+    © 2026 ACSES DKTE. All rights reserved.
+  </div>
 
 </div>
 
+<!-- Loading any necessary common JS for background elements if needed -->
+<!-- <script src="common.js"></script> -->
 </body>
 </html>
