@@ -197,7 +197,7 @@ const PORTAL_PAST_EVENTS = [
     coverImage: "assets/events/teachers-day/cover-group-photo.jpg",
     gallery: [
       "assets/events/teachers_day_2026./lamp_lighting.jpeg",
-       "assets/events/teachers_day_2026./teachers.jpg",
+       "assets/events/teachers_day_2026./teachers.png",
        "assets/events/teachers_day_2026./president.png",
        "assets/events/teachers_day_2026./falicitation.jpeg",
        "assets/events/teachers_day_2026./selfi_point.jpeg"       
@@ -220,10 +220,10 @@ const PORTAL_PAST_EVENTS = [
     date: "03 September 2026",
     coverImage: "assets/events/teachers-day/cover-group-photo.jpg",
     gallery: [
-      "assets/events/Inauguration./lamp_lightning.mov",
-       "assets/events/Inauguration./hod.mov",
-       "assets/events/Inauguration./falicitation.HEIC",
-       "assets/events/Inauguration./web_launch.HEIC",
+      "assets/events/Inauguration./lamp_lightning.png",
+       "assets/events/Inauguration./hod.png",
+       "assets/events/Inauguration./falicitation.png",
+       "assets/events/Inauguration./teachers.png",
        "assets/events/Inauguration./group.jpeg"       
     ],
   fullDescription: "🚀 ACSES Club Inauguration – The Association of Computer Science and Engineering Students (ACSES) officially inaugurated its new academic year with an inspiring celebration attended by students, faculty members, and distinguished guests. The event began with a traditional lamp-lighting ceremony, symbolizing the pursuit of knowledge and innovation. The inauguration highlighted ACSES's vision of creating a platform for students to explore technology, develop practical skills, collaborate on innovative ideas, and participate in technical activities. The event marked the beginning of another exciting year of learning, creativity, teamwork, and technological growth for the ACSES community.",
