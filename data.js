@@ -72,8 +72,6 @@ const EVENTS = [
   { tick: "[ PORTAL ]", desc: "The Pirate’s Gambit - fun + challenge 🚀", status: "upcoming", category: "Portal Event", date: "TO BE ANNOUNCED" },
   { tick: "[ NEW ]", desc: "Guest lecture — Systems design at scale", status: "upcoming", category: "Talk", date: "Nov 2026" },
   { tick: "[ NEW ]", desc: "Tech Nova", status: "upcoming", category: "Community", date: "march 2027" },
-   { tick: "[ NEW ]", desc: "Teachers' day celebration", status: "past", category: "Community", date: "05 sept 2026" },
-   { tick: "[ NEW ]", desc: "ACSES club inauguration", status: "past", category: "Community", date: "03 sept 2026" },
   { tick: "[ LOG ]", desc: "Resume clinic & mock interview drive", status: "past", category: "Careers", date: "Apr 2026" },
   { tick: "[ LOG ]", desc: "Alumni mentorship meetup", status: "past", category: "Community", date: "Feb 2026" },
   { tick: "[ LOG ]", desc: "Winter hackathon — 36 hours, 40 teams", status: "past", category: "Hackathon", date: "Dec 2025" },
@@ -191,6 +189,30 @@ const PORTAL_BENEFITS = [
  ];
 
 const PORTAL_PAST_EVENTS = [
+       {
+    id: "teachers-day-2026",
+    title: "Teacher's Day",
+    description: "Teacher's Day Celebration",
+    date: "05 September 2026",
+    coverImage: "assets/events/teachers-day/cover-group-photo.jpg",
+    gallery: [
+      "assets/events/teachers_day_2026./lamp_lighting.jpeg",
+       "assets/events/teachers_day_2026./teachers.HEIC",
+       "assets/events/teachers_day_2026./president.png",
+       "assets/events/teachers_day_2026./falicitation.jpeg",
+       "assets/events/teachers_day_2026./selfi_point.jpeg"       
+    ],
+   fullDescription: "🎉 Teacher's Day Celebration – ACSES celebrated Teacher's Day with enthusiasm and gratitude, bringing together the faculty and students of the Department of CSE. The celebration commenced with a traditional lamp-lighting ceremony, followed by fun-filled interactive activities that created a lively and cheerful atmosphere. Students took the opportunity to express their appreciation through heartfelt wishes and memorable moments with their teachers. The event served as a beautiful tribute to the mentors whose knowledge, guidance, and encouragement continue to inspire students to learn, grow, and achieve more." ,
+      highlights: [
+      "Teacher's Day Celebration by ACSES",
+      "Traditional Lamp-Lighting Ceremony",
+       "Student performance",
+      "Interactive Games & Activities with Faculty",
+      "'ACSES Well Wishes' Board with Student Notes",
+      "Organized by the ACSES Team",
+      "Event Date: 5th September 2026"
+    ]
+  },
   {
     id: "tech-nova-2024",
     title: "Tech-Nova",
@@ -307,30 +329,6 @@ const PORTAL_PAST_EVENTS = [
       "Cash Prizes & Recognition for Winners",
       "Event Date: 24th February",
       "Organized by ACSES & AISA, DKTE"
-    ]
-  },
-    {
-    id: "teachers-day-2026",
-    title: "Teacher's Day",
-    description: "Teacher's Day Celebration",
-    date: "05 September 2026",
-    coverImage: "assets/events/teachers-day/cover-group-photo.jpg",
-    gallery: [
-      "assets/events/teachers_day_2026./lamp_lighting.jpeg",
-       "assets/events/teachers_day_2026./teachers.HEIC",
-       "assets/events/teachers_day_2026./president.png",
-       "assets/events/teachers_day_2026./falicitation.jpeg",
-       "assets/events/teachers_day_2026./selfi_point.jpeg"       
-    ],
-   fullDescription: "🎉 Teacher's Day Celebration – ACSES celebrated Teacher's Day with enthusiasm and gratitude, bringing together the faculty and students of the Department of CSE. The celebration commenced with a traditional lamp-lighting ceremony, followed by fun-filled interactive activities that created a lively and cheerful atmosphere. Students took the opportunity to express their appreciation through heartfelt wishes and memorable moments with their teachers. The event served as a beautiful tribute to the mentors whose knowledge, guidance, and encouragement continue to inspire students to learn, grow, and achieve more." ,
-      highlights: [
-      "Teacher's Day Celebration by ACSES",
-      "Traditional Lamp-Lighting Ceremony",
-       "Student performance",
-      "Interactive Games & Activities with Faculty",
-      "'ACSES Well Wishes' Board with Student Notes",
-      "Organized by the ACSES Team",
-      "Event Date: 5th September 2026"
     ]
   }
 ];
