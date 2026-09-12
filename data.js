@@ -213,6 +213,34 @@ const PORTAL_PAST_EVENTS = [
       "Event Date: 5th September 2026"
     ]
   },
+{
+    id: "ACSES club inauguration",
+    title: "Inauguration",
+    description: "New team falicitation",
+    date: "03 September 2026",
+    coverImage: "assets/events/teachers-day/cover-group-photo.jpg",
+    gallery: [
+      "assets/events/Inauguration./lamp_lightning.mov",
+       "assets/events/Inauguration./hod.mov",
+       "assets/events/Inauguration./falicitation.HEIC",
+       "assets/events/Inauguration./web_launch.HEIC",
+       "assets/events/Inauguration./group.jpeg"       
+    ],
+  fullDescription: "🚀 ACSES Club Inauguration – The Association of Computer Science and Engineering Students (ACSES) officially inaugurated its new academic year with an inspiring celebration attended by students, faculty members, and distinguished guests. The event began with a traditional lamp-lighting ceremony, symbolizing the pursuit of knowledge and innovation. The inauguration highlighted ACSES's vision of creating a platform for students to explore technology, develop practical skills, collaborate on innovative ideas, and participate in technical activities. The event marked the beginning of another exciting year of learning, creativity, teamwork, and technological growth for the ACSES community.",
+   highlights: [
+  "ACSES Club Inauguration Ceremony",
+  "Traditional Deep Prajwalan",
+  "Saraswati Poojan",
+  "Felicitation of Distinguished Dignitaries",
+  "Official Launch of the ACSES Website",
+  "Inspiring Address by Prof. (Dr.) D. V. Kodavade Sir",
+  "Felicitation of the Previous ACSES Team",
+  "Badge Distribution to the New ACSES Team",
+  "Vote of Thanks",
+  "Organized by the ACSES Team",
+  "Event Date: 3rd September 2026"
+]
+  },  
   {
     id: "tech-nova-2024",
     title: "Tech-Nova",
