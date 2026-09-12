@@ -191,7 +191,7 @@ const PORTAL_BENEFITS = [
 const PORTAL_PAST_EVENTS = [
        {
     id: "teachers-day-2026",
-    title: "Teacher's Day",
+    title: "Teacher's Day-2026",
     description: "Teacher's Day Celebration",
     date: "05 September 2026",
     coverImage: "assets/events/teachers-day/cover-group-photo.jpg",
