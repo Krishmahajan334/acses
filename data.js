@@ -72,6 +72,7 @@ const EVENTS = [
   { tick: "[ PORTAL ]", desc: "The Pirate’s Gambit - fun + challenge 🚀", status: "upcoming", category: "Portal Event", date: "TO BE ANNOUNCED" },
   { tick: "[ NEW ]", desc: "Guest lecture — Systems design at scale", status: "upcoming", category: "Talk", date: "Nov 2026" },
   { tick: "[ NEW ]", desc: "Tech Nova", status: "upcoming", category: "Community", date: "march 2027" },
+   { tick: "[ NEW ]", desc: "Teachers' day celebration", status: "past", category: "Community", date: "03 sept 2026" },
   { tick: "[ LOG ]", desc: "Resume clinic & mock interview drive", status: "past", category: "Careers", date: "Apr 2026" },
   { tick: "[ LOG ]", desc: "Alumni mentorship meetup", status: "past", category: "Community", date: "Feb 2026" },
   { tick: "[ LOG ]", desc: "Winter hackathon — 36 hours, 40 teams", status: "past", category: "Hackathon", date: "Dec 2025" },
