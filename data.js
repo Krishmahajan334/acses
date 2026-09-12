@@ -197,7 +197,7 @@ const PORTAL_PAST_EVENTS = [
     coverImage: "assets/events/teachers-day/cover-group-photo.jpg",
     gallery: [
       "assets/events/teachers_day_2026./lamp_lighting.jpeg",
-       "assets/events/teachers_day_2026./teachers.HEIC",
+       "assets/events/teachers_day_2026./teachers.jpg",
        "assets/events/teachers_day_2026./president.png",
        "assets/events/teachers_day_2026./falicitation.jpeg",
        "assets/events/teachers_day_2026./selfi_point.jpeg"       
