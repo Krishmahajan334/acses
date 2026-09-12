@@ -313,17 +313,14 @@ const PORTAL_PAST_EVENTS = [
     id: "teachers-day-2026",
     title: "Teacher's Day",
     description: "Teacher's Day Celebration",
-    date: "05 September 2025",
+    date: "05 September 2026",
     coverImage: "assets/events/teachers-day/cover-group-photo.jpg",
     gallery: [
-      "assets/events/teachers-day/01-podium-speech.jpg",
-      "assets/events/teachers-day/02-lamp-lighting.jpg",
-      "assets/events/teachers-day/03-audience-hall.jpg",
-      "assets/events/teachers-day/04-audience-hall-2.jpg",
-      "assets/events/teachers-day/05-teacher-interaction.jpg",
-      "assets/events/teachers-day/06-teachers-walking-in.jpg",
-      "assets/events/teachers-day/07-event-moment.jpg",
-      "assets/events/teachers-day/08-well-wishes-board.jpg"
+      "assets/events/teachers_day_2026./lamp_lighting.jpeg",
+       "assets/events/teachers_day_2026./teachers.HEIC",
+       "assets/events/teachers_day_2026./president.png",
+       "assets/events/teachers_day_2026./falicitation.jpeg",
+       "assets/events/teachers_day_2026./selfi_point.jpeg"       
     ],
    fullDescription: "🎉 Teacher's Day Celebration – ACSES celebrated Teacher's Day with enthusiasm and gratitude, bringing together the faculty and students of the Department of CSE. The celebration commenced with a traditional lamp-lighting ceremony, followed by fun-filled interactive activities that created a lively and cheerful atmosphere. Students took the opportunity to express their appreciation through heartfelt wishes and memorable moments with their teachers. The event served as a beautiful tribute to the mentors whose knowledge, guidance, and encouragement continue to inspire students to learn, grow, and achieve more." ,
       highlights: [
