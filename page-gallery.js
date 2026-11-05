@@ -88,44 +88,81 @@ document.getElementById('headerStats').innerHTML = [
 (function () {
   const ring = document.getElementById('galleryRing');
   if (!ring) return;
-  const items = displayGallery.filter(g => g.img).slice(0, 8);
+  // Map items with their original index in displayGallery so openLightbox opens the correct item
+  const ringItems = displayGallery
+    .map((g, i) => ({ ...g, originalIndex: i }))
+    .filter(g => g.img)
+    .slice(0, 8);
   const radius = 300;
-  const step = 360 / items.length;
-  ring.innerHTML = items.map((g, i) => `
-    <div class="ring-item" data-index="${i}" style="transform:rotateY(${i * step}deg) translateZ(${radius}px);">
+  const step = 360 / ringItems.length;
+  ring.innerHTML = ringItems.map((g, i) => `
+    <div class="ring-item" data-original-index="${g.originalIndex}" style="transform:rotateY(${i * step}deg) translateZ(${radius}px);">
       ${photoTileHTML(g)}
     </div>
   `).join('');
 
   let angle = 0;
   let autoRotate = true;
-  let dragging = false;
-  let startX = 0, startAngle = 0;
+  let isPointerDown = false;
+  let isDragging = false;
+  let startX = 0, startY = 0, startAngle = 0;
 
   function apply() { ring.style.transform = `rotateY(${angle}deg)`; }
 
+  // Pause rotation while hovering over the 3D spinner
+  ring.addEventListener('mouseenter', () => { autoRotate = false; });
+  ring.addEventListener('mouseleave', () => { if (!isPointerDown) autoRotate = true; });
+
   ring.addEventListener('pointerdown', (e) => {
-    dragging = true; autoRotate = false;
-    startX = e.clientX; startAngle = angle;
-    ring.setPointerCapture(e.pointerId);
+    isPointerDown = true;
+    isDragging = false;
+    autoRotate = false;
+    startX = e.clientX;
+    startY = e.clientY;
+    startAngle = angle;
+    try { ring.setPointerCapture(e.pointerId); } catch (err) {}
   });
+
   ring.addEventListener('pointermove', (e) => {
-    if (!dragging) return;
-    angle = startAngle + (e.clientX - startX) * 0.35;
-    apply();
+    if (!isPointerDown) return;
+    const diffX = e.clientX - startX;
+    const diffY = e.clientY - startY;
+    if (!isDragging && Math.hypot(diffX, diffY) > 5) {
+      isDragging = true;
+    }
+    if (isDragging) {
+      angle = startAngle + diffX * 0.35;
+      apply();
+    }
   });
-  function endDrag() { dragging = false; setTimeout(() => { autoRotate = true; }, 2200); }
-  ring.addEventListener('pointerup', endDrag);
-  ring.addEventListener('pointerleave', () => { if (dragging) endDrag(); });
+
+  function endPointer(e) {
+    if (!isPointerDown) return;
+    try { if (ring.hasPointerCapture(e.pointerId)) ring.releasePointerCapture(e.pointerId); } catch (err) {}
+    isPointerDown = false;
+    setTimeout(() => {
+      isDragging = false;
+      autoRotate = true;
+    }, 200);
+  }
+
+  ring.addEventListener('pointerup', endPointer);
+  ring.addEventListener('pointercancel', endPointer);
 
   ring.querySelectorAll('.ring-item').forEach(el => {
-    el.addEventListener('click', () => { if (!dragging) openLightbox(parseInt(el.dataset.index, 10)); });
+    el.addEventListener('click', (e) => {
+      if (isDragging) return;
+      const originalIdx = parseInt(el.dataset.originalIndex, 10);
+      openLightbox(originalIdx);
+    });
   });
 
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (!reduce) {
     (function loop() {
-      if (autoRotate) angle += 0.06;
+      if (autoRotate && !document.body.classList.contains('menu-open')) {
+        angle += 0.06;
+      }
       apply();
       requestAnimationFrame(loop);
     })();
