@@ -93,10 +93,28 @@ document.getElementById('eventsPreview').innerHTML = upcoming.map((e, i) => `
 `).join('');
 
 document.getElementById('galleryPreview').innerHTML = ALL_GALLERY.slice(0, 4).map((g, i) => {
-  const style = g.img ? ` style="background-image:linear-gradient(180deg,transparent 35%,rgba(0,0,0,.78)),url('${g.img}');background-size:cover;background-position:center;"` : '';
+  if (g.type === 'video') {
+    return `
+      <div class="photo-card reveal3d tone-${g.tone}" style="--rd:${i * 60}ms;">
+        <div class="photo-tile">
+          <div class="gallery-video-container">
+            <video src="${g.videoSrc}" poster="${g.poster || ''}" autoplay loop muted playsinline preload="metadata"></video>
+          </div>
+          <div class="video-badge">
+            <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            <span>Reel</span>
+          </div>
+          <div class="photo-title">${g.title}</div>
+          <div class="photo-meta">${g.category} · ${g.year}</div>
+        </div>
+      </div>
+    `;
+  }
+  const imageEl = g.img ? `<img class="photo-tile-img" src="${g.img}" alt="${g.title}" loading="lazy" />` : '';
   return `
     <div class="photo-card reveal3d tone-${g.tone}" style="--rd:${i * 60}ms;">
-      <div class="photo-tile"${style}>
+      <div class="photo-tile">
+        ${imageEl}
         <svg class="cam" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.6"><path d="M4 8h3l1.5-2h7L17 8h3v11H4z"/><circle cx="12" cy="13.5" r="3.2"/></svg>
         <div class="photo-title">${g.title}</div>
         <div class="photo-meta">${g.category} · ${g.year}</div>

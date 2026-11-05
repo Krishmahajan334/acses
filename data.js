@@ -66,12 +66,12 @@ const BENEFITS = [
 // ---- Events / timeline ----
 // category: used for filtering on the Events page
 const EVENTS = [
-  { tick: "[ NEW ]", desc: "Freshers' party", status: "upcoming", category: "Community", date: "Oct 2026" },
   { tick: "[ NEW ]", desc: "Technical workshop series — AI, Cloud & Security tracks", status: "upcoming", category: "Workshop", date: "Sep 2026" },
   { tick: "[ NEW ]", desc: "Campus hackathon — build, ship, present", status: "upcoming", category: "Hackathon", date: "Oct 2026" },
   { tick: "[ PORTAL ]", desc: "The Pirate’s Gambit - fun + challenge 🚀", status: "upcoming", category: "Portal Event", date: "TO BE ANNOUNCED" },
   { tick: "[ NEW ]", desc: "Guest lecture — Systems design at scale", status: "upcoming", category: "Talk", date: "Nov 2026" },
   { tick: "[ NEW ]", desc: "Tech Nova", status: "upcoming", category: "Community", date: "march 2027" },
+  { tick: "[ LOG ]", desc: "Freshers' 2026 — Welcome Party & Orientation", status: "past", category: "Community", date: "15 Oct 2026" },
   { tick: "[ LOG ]", desc: "Resume clinic & mock interview drive", status: "past", category: "Careers", date: "Apr 2026" },
   { tick: "[ LOG ]", desc: "Alumni mentorship meetup", status: "past", category: "Community", date: "Feb 2026" },
   { tick: "[ LOG ]", desc: "Winter hackathon — 36 hours, 40 teams", status: "past", category: "Hackathon", date: "Dec 2025" },
@@ -189,7 +189,74 @@ const PORTAL_BENEFITS = [
  ];
 
 const PORTAL_PAST_EVENTS = [
-       {
+  {
+    id: "freshers-2026",
+    title: "Freshers' 2026",
+    description: "Welcome Party & Orientation",
+    date: "15 Oct 2026",
+    coverImage: "assets/events/Freshers_2026/IMG_1.1.jpg",
+    media: [
+      {
+        type: "video",
+        src: "assets/events/Freshers_2026/Freshers_reel1.MP4",
+        poster: "assets/events/Freshers_2026/Freshers_reel1_poster.png",
+        title: "Freshers' 2026 — Highlight Reel 1"
+      },
+      {
+        type: "video",
+        src: "assets/events/Freshers_2026/Freshers_reel2_updated.mp4",
+        poster: "assets/events/Freshers_2026/Freshers_reel2_updated_poster.png",
+        title: "Freshers' 2026 — Highlight Reel 2"
+      },
+      {
+        type: "image",
+        src: "assets/events/Freshers_2026/IMG_1.1.jpg",
+        title: "Freshers' 2026 — Photo 1.1"
+      },
+      {
+        type: "image",
+        src: "assets/events/Freshers_2026/IMG_1.jpg",
+        title: "Freshers' 2026 — Photo 1"
+      },
+      {
+        type: "image",
+        src: "assets/events/Freshers_2026/IMG_2.jpg",
+        title: "Freshers' 2026 — Photo 2"
+      },
+      {
+        type: "image",
+        src: "assets/events/Freshers_2026/IMG_3.jpg",
+        title: "Freshers' 2026 — Photo 3"
+      },
+      {
+        type: "image",
+        src: "assets/events/Freshers_2026/IMG_4.jpg",
+        title: "Freshers' 2026 — Photo 4"
+      },
+      {
+        type: "image",
+        src: "assets/events/Freshers_2026/IMG_5.jpg",
+        title: "Freshers' 2026 — Photo 5"
+      }
+    ],
+    gallery: [
+      "assets/events/Freshers_2026/IMG_1.1.jpg",
+      "assets/events/Freshers_2026/IMG_1.jpg",
+      "assets/events/Freshers_2026/IMG_2.jpg",
+      "assets/events/Freshers_2026/IMG_3.jpg",
+      "assets/events/Freshers_2026/IMG_4.jpg",
+      "assets/events/Freshers_2026/IMG_5.jpg"
+    ],
+    fullDescription: "🎉 Freshers' 2026 – Welcome Party & Orientation! ACSES warmly welcomed the incoming batch with a spectacular celebration on 15th October 2026. Packed with energetic performances, interactive team activities, faculty blessings, and memorable moments, the event introduced our newest engineers to the ACSES family spirit.",
+    highlights: [
+      "Freshers' 2026 Grand Celebration",
+      "Event Date: 15th October 2026",
+      "Welcome Performances & Interactive Games",
+      "Student Mentorship & Community Induction",
+      "High-energy Reel Highlights & Photo Sessions"
+    ]
+  },
+  {
     id: "teachers-day-2026",
     title: "Teacher's Day-2026",
     description: "Teacher's Day Celebration",
@@ -197,22 +264,22 @@ const PORTAL_PAST_EVENTS = [
     coverImage: "assets/events/teachers-day/cover-group-photo.jpg",
     gallery: [
       "assets/events/teachers_day_2026./lamp_lighting.jpeg",
-       "assets/events/teachers_day_2026./teachers.png",
-       "assets/events/teachers_day_2026./falicitation.jpeg",
-       "assets/events/teachers_day_2026./selfi_point.jpeg"       
+      "assets/events/teachers_day_2026./teachers.png",
+      "assets/events/teachers_day_2026./falicitation.jpeg",
+      "assets/events/teachers_day_2026./selfi_point.jpeg"       
     ],
-   fullDescription: "🎉 Teacher's Day Celebration – ACSES celebrated Teacher's Day with enthusiasm and gratitude, bringing together the faculty and students of the Department of CSE. The celebration commenced with a traditional lamp-lighting ceremony, followed by fun-filled interactive activities that created a lively and cheerful atmosphere. Students took the opportunity to express their appreciation through heartfelt wishes and memorable moments with their teachers. The event served as a beautiful tribute to the mentors whose knowledge, guidance, and encouragement continue to inspire students to learn, grow, and achieve more." ,
-      highlights: [
+    fullDescription: "🎉 Teacher's Day Celebration – ACSES celebrated Teacher's Day with enthusiasm and gratitude, bringing together the faculty and students of the Department of CSE. The celebration commenced with a traditional lamp-lighting ceremony, followed by fun-filled interactive activities that created a lively and cheerful atmosphere. Students took the opportunity to express their appreciation through heartfelt wishes and memorable moments with their teachers. The event served as a beautiful tribute to the mentors whose knowledge, guidance, and encouragement continue to inspire students to learn, grow, and achieve more.",
+    highlights: [
       "Teacher's Day Celebration by ACSES",
       "Traditional Lamp-Lighting Ceremony",
-       "Student performance",
+      "Student performance",
       "Interactive Games & Activities with Faculty",
       "'ACSES Well Wishes' Board with Student Notes",
       "Organized by the ACSES Team",
       "Event Date: 5th September 2026"
     ]
   },
-{
+  {
     id: "ACSES club inauguration",
     title: "Inauguration",
     description: "New team falicitation",
@@ -220,26 +287,26 @@ const PORTAL_PAST_EVENTS = [
     coverImage: "assets/events/teachers-day/cover-group-photo.jpg",
     gallery: [
       "assets/events/Inauguration./lamp_lightning.png",
-       "assets/events/Inauguration./hod.png",
-       "assets/events/Inauguration./falicitation.png",
-       "assets/events/Inauguration./web_launch.png",
-       "assets/events/Inauguration./group.jpeg"       
+      "assets/events/Inauguration./hod.png",
+      "assets/events/Inauguration./falicitation.png",
+      "assets/events/Inauguration./web_launch.png",
+      "assets/events/Inauguration./group.jpeg"       
     ],
-  fullDescription: "🚀 ACSES Club Inauguration – The Association of Computer Science and Engineering Students (ACSES) officially inaugurated its new academic year with an inspiring celebration attended by students, faculty members, and distinguished guests. The event began with a traditional lamp-lighting ceremony, symbolizing the pursuit of knowledge and innovation. The inauguration highlighted ACSES's vision of creating a platform for students to explore technology, develop practical skills, collaborate on innovative ideas, and participate in technical activities. The event marked the beginning of another exciting year of learning, creativity, teamwork, and technological growth for the ACSES community.",
-   highlights: [
-  "ACSES Club Inauguration Ceremony",
-  "Traditional Deep Prajwalan",
-  "Saraswati Poojan",
-  "Felicitation of Distinguished Dignitaries",
-  "Official Launch of the ACSES Website",
-  "Inspiring Address by Prof. (Dr.) D. V. Kodavade Sir",
-  "Felicitation of the Previous ACSES Team",
-  "Badge Distribution to the New ACSES Team",
-  "Vote of Thanks",
-  "Organized by the ACSES Team",
-  "Event Date: 3rd September 2026"
-]
-  },  
+    fullDescription: "🚀 ACSES Club Inauguration – The Association of Computer Science and Engineering Students (ACSES) officially inaugurated its new academic year with an inspiring celebration attended by students, faculty members, and distinguished guests. The event began with a traditional lamp-lighting ceremony, symbolizing the pursuit of knowledge and innovation. The inauguration highlighted ACSES's vision of creating a platform for students to explore technology, develop practical skills, collaborate on innovative ideas, and participate in technical activities. The event marked the beginning of another exciting year of learning, creativity, teamwork, and technological growth for the ACSES community.",
+    highlights: [
+      "ACSES Club Inauguration Ceremony",
+      "Traditional Deep Prajwalan",
+      "Saraswati Poojan",
+      "Felicitation of Distinguished Dignitaries",
+      "Official Launch of the ACSES Website",
+      "Inspiring Address by Prof. (Dr.) D. V. Kodavade Sir",
+      "Felicitation of the Previous ACSES Team",
+      "Badge Distribution to the New ACSES Team",
+      "Vote of Thanks",
+      "Organized by the ACSES Team",
+      "Event Date: 3rd September 2026"
+    ]
+  },
   {
     id: "tech-nova-2024",
     title: "Tech-Nova",
@@ -392,14 +459,31 @@ const ALL_EVENTS = [
 
 const ALL_GALLERY = [
   ...GALLERY,
-  ...PORTAL_PAST_EVENTS.flatMap(e => e.gallery.map((img, i) => ({
-    title: `${e.title} — Photo ${i + 1}`,
-    event: e.title,
-    category: "Portal Archive",
-    year: (e.date.match(/(20\d{2})/) || ["", "2024"])[1],
-    tone: i % 3 === 0 ? "blue" : i % 3 === 1 ? "circuit" : "amber",
-    img
-  })))
+  ...PORTAL_PAST_EVENTS.flatMap(e => {
+    if (e.media && e.media.length) {
+      return e.media.map((item, i) => ({
+        type: item.type || "image",
+        title: item.title || `${e.title} — Item ${i + 1}`,
+        event: e.title,
+        category: "Portal Archive",
+        year: (e.date.match(/(20\d{2})/) || ["", "2024"])[1],
+        tone: i % 3 === 0 ? "blue" : i % 3 === 1 ? "circuit" : "amber",
+        img: item.type === "video" ? (item.poster || item.src) : item.src,
+        videoSrc: item.type === "video" ? item.src : null,
+        poster: item.poster || null
+      }));
+    }
+    return e.gallery.map((img, i) => ({
+      type: "image",
+      title: `${e.title} — Photo ${i + 1}`,
+      event: e.title,
+      category: "Portal Archive",
+      year: (e.date.match(/(20\d{2})/) || ["", "2024"])[1],
+      tone: i % 3 === 0 ? "blue" : i % 3 === 1 ? "circuit" : "amber",
+      img,
+      videoSrc: null
+    }));
+  })
 ];
 
 // ============================================================

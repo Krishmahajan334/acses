@@ -1,16 +1,77 @@
 /* ============================================================
    ACSES DKTE — GALLERY PAGE LOGIC
-   Existing gallery/coverflow/lightbox design preserved; portal photos added.
+   Existing gallery/coverflow/lightbox design preserved; portal photos & reels added.
 ============================================================ */
 
 const displayGallery = ALL_GALLERY;
 
-function photoTileHTML(g) {
-  const imageStyle = g.img
-    ? ` style="background-image:linear-gradient(180deg,transparent 35%,rgba(0,0,0,.78)),url('${g.img}');background-size:cover;background-position:center;"`
+function photoTileHTML(g, isLightbox = false) {
+  if (g.type === 'video') {
+    if (isLightbox) {
+      return `
+        <div class="lightbox-reel-wrap">
+          <div class="reel-header-badge">
+            <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            <span>Reel</span>
+          </div>
+          <div class="lightbox-reel-stage" id="reelStage" title="Tap to pause/play">
+            <video id="lightboxActiveVideo" src="${g.videoSrc}" poster="${g.poster || ''}" autoplay loop playsinline preload="auto"></video>
+            <div class="reel-center-feedback" id="reelFeedback">
+              <!-- Dynamically populated icon -->
+            </div>
+            <div class="reel-central-controls">
+              <button class="reel-action-pill" id="reelPlayPauseBtn" type="button" aria-label="Play / Pause">
+                <svg id="reelPlayPauseIcon" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+                <span id="reelPlayPauseText">Pause</span>
+              </button>
+              <button class="reel-action-pill" id="reelAudioBtn" type="button" aria-label="Mute / Unmute">
+                <svg id="reelAudioIcon" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                <span id="reelAudioText">Mute</span>
+              </button>
+            </div>
+          </div>
+          <div class="lightbox-media-info">
+            <div class="photo-title" style="font-size:15px; margin-bottom:4px;">${g.title}</div>
+            <div class="photo-meta">${g.category} · ${g.year} · Tap video to play/pause</div>
+          </div>
+        </div>
+      `;
+    }
+
+    return `
+      <div class="photo-tile tone-${g.tone}">
+        <div class="gallery-video-container">
+          <video class="gallery-card-video" src="${g.videoSrc}" poster="${g.poster || ''}" autoplay loop muted playsinline preload="metadata"></video>
+        </div>
+        <div class="video-badge">
+          <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          <span>Reel</span>
+        </div>
+        <div class="photo-title">${g.title}</div>
+        <div class="photo-meta">${g.category} · ${g.year}</div>
+      </div>
+    `;
+  }
+
+  if (isLightbox) {
+    return `
+      <div class="lightbox-photo-wrap">
+        <img class="lightbox-photo-img" src="${g.img}" alt="${g.title}" />
+        <div class="lightbox-media-info">
+          <div class="photo-title" style="font-size:15px; margin-bottom:4px;">${g.title}</div>
+          <div class="photo-meta">${g.category} · ${g.year}</div>
+        </div>
+      </div>
+    `;
+  }
+
+  const imageEl = g.img
+    ? `<img class="photo-tile-img" src="${g.img}" alt="${g.title}" loading="lazy" />`
     : '';
+
   return `
-    <div class="photo-tile tone-${g.tone}"${imageStyle}>
+    <div class="photo-tile tone-${g.tone}">
+      ${imageEl}
       <svg class="cam" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.6"><path d="M4 8h3l1.5-2h7L17 8h3v11H4z"/><circle cx="12" cy="13.5" r="3.2"/></svg>
       <div class="photo-title">${g.title}</div>
       <div class="photo-meta">${g.category} · ${g.year}</div>
@@ -111,7 +172,110 @@ const lbFrame = document.getElementById('lightboxFrame');
 
 function renderLightbox() {
   const g = displayGallery[lbIndex];
-  lbFrame.innerHTML = photoTileHTML(g);
+  lbFrame.innerHTML = photoTileHTML(g, true);
+
+  const video = lbFrame.querySelector('#lightboxActiveVideo');
+  if (video) {
+    // When opened in full view, it should play unmuted
+    video.muted = false;
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        // Autoplay policy fallback: if browser blocks unmuted sound, start muted and update UI
+        video.muted = true;
+        video.play();
+        updateAudioUI();
+      });
+    }
+
+    const reelStage = lbFrame.querySelector('#reelStage');
+    const feedback = lbFrame.querySelector('#reelFeedback');
+    const playPauseBtn = lbFrame.querySelector('#reelPlayPauseBtn');
+    const playPauseIcon = lbFrame.querySelector('#reelPlayPauseIcon');
+    const playPauseText = lbFrame.querySelector('#reelPlayPauseText');
+    const audioBtn = lbFrame.querySelector('#reelAudioBtn');
+    const audioIcon = lbFrame.querySelector('#reelAudioIcon');
+    const audioText = lbFrame.querySelector('#reelAudioText');
+
+    let feedbackTimer = null;
+    const showFeedback = (html) => {
+      if (!feedback) return;
+      feedback.innerHTML = html;
+      feedback.classList.add('active');
+      clearTimeout(feedbackTimer);
+      feedbackTimer = setTimeout(() => {
+        feedback.classList.remove('active');
+      }, 500);
+    };
+
+    const updatePlayStateUI = () => {
+      if (video.paused) {
+        if (playPauseIcon) playPauseIcon.innerHTML = `<polygon points="6 4 19 12 6 20 6 4"/>`;
+        if (playPauseText) playPauseText.textContent = "Play";
+      } else {
+        if (playPauseIcon) playPauseIcon.innerHTML = `<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>`;
+        if (playPauseText) playPauseText.textContent = "Pause";
+      }
+    };
+
+    const updateAudioUI = () => {
+      if (video.muted) {
+        if (audioIcon) audioIcon.innerHTML = `<path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>`;
+        if (audioText) audioText.textContent = "Unmute";
+      } else {
+        if (audioIcon) audioIcon.innerHTML = `<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>`;
+        if (audioText) audioText.textContent = "Mute";
+      }
+    };
+
+    const togglePlay = () => {
+      if (video.paused) {
+        video.play();
+        showFeedback(`<svg viewBox="0 0 24 24"><polygon points="6 4 19 12 6 20 6 4"/></svg>`);
+      } else {
+        video.pause();
+        showFeedback(`<svg viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>`);
+      }
+      updatePlayStateUI();
+    };
+
+    const toggleAudio = () => {
+      video.muted = !video.muted;
+      if (video.muted) {
+        showFeedback(`<svg viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>`);
+      } else {
+        showFeedback(`<svg viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>`);
+      }
+      updateAudioUI();
+    };
+
+    // Instagram tap behavior: tapping anywhere on the reel toggles playback
+    if (reelStage) {
+      reelStage.addEventListener('click', (e) => {
+        if (e.target.closest('.reel-central-controls')) return;
+        togglePlay();
+      });
+    }
+
+    if (playPauseBtn) {
+      playPauseBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        togglePlay();
+      });
+    }
+
+    if (audioBtn) {
+      audioBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleAudio();
+      });
+    }
+
+    video.addEventListener('play', updatePlayStateUI);
+    video.addEventListener('pause', updatePlayStateUI);
+    updatePlayStateUI();
+    updateAudioUI();
+  }
 }
 function openLightbox(i) {
   lbIndex = i;
@@ -120,10 +284,18 @@ function openLightbox(i) {
   document.body.classList.add('menu-open');
 }
 function closeLightbox() {
+  const video = lbFrame.querySelector('video');
+  if (video) {
+    video.pause();
+    video.src = '';
+  }
+  lbFrame.innerHTML = '';
   lightbox.classList.remove('open');
   document.body.classList.remove('menu-open');
 }
 function stepLightbox(delta) {
+  const video = lbFrame.querySelector('video');
+  if (video) video.pause();
   lbIndex = (lbIndex + delta + displayGallery.length) % displayGallery.length;
   renderLightbox();
 }
